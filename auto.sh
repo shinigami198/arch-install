@@ -260,16 +260,20 @@ arch-chroot /mnt sed -i 's/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL
 
 # Call the separate scripts if needed
 if [[ $has_nvidia =~ ^[Yy]$ ]]; then
+    chmod +x nvidia.sh
     ./nvidia.sh
 fi
 
 if [[ $install_sddm =~ ^[Yy]$ ]]; then
+    chmod +x SDDM.sh
     ./SDDM.sh
     if [[ $install_plasma =~ ^[Yy]$ ]]; then
+        chmod +x kde.sh
         ./kde.sh
     fi
 fi
 
+chmod +x grub.sh
 ./grub.sh
 
 # Ensure all changes are written to disk
